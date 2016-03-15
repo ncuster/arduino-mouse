@@ -8,8 +8,8 @@
 
 const int rightMouseButton = 7;     // switch to turn on an-d off mouse control (this is our right-mouse click for now)
 const int leftMouseButton = 8; // switch to do a leftmouse-click
-const int xAxisLeft  = 12;
-const int xAxisRight = 10;
+const int xAxisLeft  = 10;
+const int xAxisRight = 12;
 const int yAxisUp    = 11;
 const int yAxisDown  = 9;
 const int ledPin     = 13;        // our built in LED 
