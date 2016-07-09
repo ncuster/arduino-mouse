@@ -25,7 +25,7 @@ int lastSwitchState = LOW;        // previous switch state
 void setup() {
     // a little hack so we can set output in setup()
     Serial.begin(9600);
-    while (!Serial) ;
+    //while (!Serial) ;
     
     pinMode(ledPin, OUTPUT);                // the LED pin
     pinMode(xAxisLeft, INPUT_PULLUP);
