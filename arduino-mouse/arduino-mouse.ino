@@ -76,10 +76,37 @@ void processMouseMovement() {
     if ( (xDistance != 0) || (yDistance != 0) ) {
         Mouse.move(xDistance, yDistance, 0);
     }
+
+    // Handle button state changes, to support click and drag as well as simple click
+    if ( leftButton.stateChanged() ) {
+          if ( Mouse.isPressed(MOUSE_LEFT) ) {
+              Mouse.release(MOUSE_LEFT);
+          } else {
+              Mouse.press(MOUSE_LEFT);
+          }
+    }
+} 
+
+// This assumes the mouse is active, that the arduino is actively
+// sending mouse events (and not your computer's).
+void processMouseMovementSingleClick() {
+    int leftState = digitalRead(xAxisLeft);
+    int upState = digitalRead(yAxisUp);
+    int rightState = digitalRead(xAxisRight);
+    int downState = digitalRead(yAxisDown);
+    //int clickState = digitalRead(leftButton);
   
+    // calculate the movement distance based on the button states:
+    int  xDistance = (leftState - rightState) * mouseSpeed;
+    int  yDistance = (upState - downState) * mouseSpeed;
+  
+    // if X or Y is non-zero, move:
+    if ( (xDistance != 0) || (yDistance != 0) ) {
+        Mouse.move(xDistance, yDistance, 0);
+    }
+
     // if the mouse button is pressed:
     if ( leftButton.uniquePress() ) {
-    //if (clickState == HIGH) {
         // if the mouse is not pressed, press it:
         if ( !Mouse.isPressed(MOUSE_LEFT) ) {
             Mouse.press(MOUSE_LEFT);
@@ -90,4 +117,4 @@ void processMouseMovement() {
             Mouse.release(MOUSE_LEFT);
         }
     }
-}
+} 
